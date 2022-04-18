@@ -16,7 +16,9 @@ const pathGenerator = d3.geoPath().projection(projection);
 const radiusScale = d3.scaleSqrt();
 const radiusValue = (d) => Number(d.TOTAL_Sales);
 
-d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/country/Bangladesh.topo.json").then((mapData) => {
+d3.json(
+  "https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/country/Bangladesh.topo.json"
+).then((mapData) => {
   d3.csv("./geo2.csv").then((salesData) => {
     const areas = topojson.feature(mapData, mapData.objects.map);
 
@@ -38,7 +40,10 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
 
     const formatedData1 = [
       {
-        position: [projection([Number(90.42272949)], Number(23.78141022))[0], projection([Number(90.42272949), Number(23.78141022)])[1]],
+        position: [
+          projection([Number(90.42272949)], Number(23.78141022))[0],
+          projection([Number(90.42272949), Number(23.78141022)])[1],
+        ],
         TOTAL_Sales: 1.534269173,
         title: "dummy title",
       },
@@ -46,7 +51,10 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
 
     const formatedData2 = [
       {
-        position: [projection([Number(90.42272949)], Number(23.78141022))[0], projection([Number(90.42272949), Number(23.78141022)])[1]],
+        position: [
+          projection([Number(90.42272949)], Number(23.78141022))[0],
+          projection([Number(90.42272949), Number(23.78141022)])[1],
+        ],
         TOTAL_Sales: 2.534269173,
         title: "dummy title",
       },
@@ -54,7 +62,10 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
 
     const formatedData3 = [
       {
-        position: [projection([Number(90.42272949)], Number(23.78141022))[0], projection([Number(90.42272949), Number(23.78141022)])[1]],
+        position: [
+          projection([Number(90.42272949)], Number(23.78141022))[0],
+          projection([Number(90.42272949), Number(23.78141022)])[1],
+        ],
         TOTAL_Sales: 3.534269173,
         title: "dummy title",
       },
@@ -62,7 +73,10 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
 
     const formatedData4 = [
       {
-        position: [projection([Number(90.42272949)], Number(23.78141022))[0], projection([Number(90.42272949), Number(23.78141022)])[1]],
+        position: [
+          projection([Number(90.42272949)], Number(23.78141022))[0],
+          projection([Number(90.42272949), Number(23.78141022)])[1],
+        ],
         TOTAL_Sales: 4.534269173,
         title: "dummy title",
       },
@@ -70,7 +84,10 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
 
     const formatedData5 = [
       {
-        position: [projection([Number(90.42272949)], Number(23.78141022))[0], projection([Number(90.42272949), Number(23.78141022)])[1]],
+        position: [
+          projection([Number(90.42272949)], Number(23.78141022))[0],
+          projection([Number(90.42272949), Number(23.78141022)])[1],
+        ],
         TOTAL_Sales: 5.534269173,
         title: "dummy title",
       },
@@ -83,7 +100,14 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
       .data(formatedData1)
       .join("path")
       .attr("transform", (d) => `translate(${d.position})`)
-      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData1, (d) => d.TOTAL_Sales)], [0, 180])(d.TOTAL_Sales)))
+      .attr("d", (d) =>
+        spike(
+          d3.scaleLinear(
+            [0, d3.max(formatedData1, (d) => d.TOTAL_Sales)],
+            [0, 180]
+          )(d.TOTAL_Sales)
+        )
+      )
       .append("title")
       .text(
         (d) => `${d.title}
@@ -97,54 +121,94 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
       .data(formatedData2)
       .join("path")
       .attr("transform", (d) => `translate(${d.position})`)
-      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData2, (d) => d.TOTAL_Sales)], [0, 150])(d.TOTAL_Sales)))
+      .attr("d", (d) =>
+        spike(
+          d3.scaleLinear(
+            [0, d3.max(formatedData2, (d) => d.TOTAL_Sales)],
+            [0, 150]
+          )(d.TOTAL_Sales)
+        )
+      )
       .append("title")
       .text(
         (d) => `${d.title}
   ${d3.format(",.0f")(d.TOTAL_Sales)}`
       );
 
-      svg
+    svg
       .append("g")
       .attr("class", "total-point3")
       .selectAll("path")
       .data(formatedData3)
       .join("path")
       .attr("transform", (d) => `translate(${d.position})`)
-      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData3, (d) => d.TOTAL_Sales)], [0, 120])(d.TOTAL_Sales)))
+      .attr("d", (d) =>
+        spike(
+          d3.scaleLinear(
+            [0, d3.max(formatedData3, (d) => d.TOTAL_Sales)],
+            [0, 120]
+          )(d.TOTAL_Sales)
+        )
+      )
       .append("title")
       .text(
         (d) => `${d.title}
   ${d3.format(",.0f")(d.TOTAL_Sales)}`
       );
 
-      svg
+    svg
       .append("g")
       .attr("class", "total-point4")
       .selectAll("path")
       .data(formatedData4)
       .join("path")
       .attr("transform", (d) => `translate(${d.position})`)
-      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData4, (d) => d.TOTAL_Sales)], [0, 90])(d.TOTAL_Sales)))
+      .attr("d", (d) =>
+        spike(
+          d3.scaleLinear(
+            [0, d3.max(formatedData4, (d) => d.TOTAL_Sales)],
+            [0, 90]
+          )(d.TOTAL_Sales)
+        )
+      )
       .append("title")
       .text(
         (d) => `${d.title}
   ${d3.format(",.0f")(d.TOTAL_Sales)}`
       );
 
-      svg
+    svg
       .append("g")
       .attr("class", "total-point5")
       .selectAll("path")
       .data(formatedData5)
       .join("path")
       .attr("transform", (d) => `translate(${d.position})`)
-      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData5, (d) => d.TOTAL_Sales)], [0, 60])(d.TOTAL_Sales)))
+      .attr("d", (d) =>
+        spike(
+          d3.scaleLinear(
+            [0, d3.max(formatedData5, (d) => d.TOTAL_Sales)],
+            [0, 60]
+          )(d.TOTAL_Sales)
+        )
+      )
       .append("title")
       .text(
         (d) => `${d.title}
   ${d3.format(",.0f")(d.TOTAL_Sales)}`
       );
+
+    let zoom = d3.zoom().on("zoom", handleZoom);
+
+    function handleZoom(e) {
+      d3.selectAll("svg g").attr("transform", e.transform);
+    }
+
+    function initZoom() {
+      d3.selectAll("svg").call(zoom);
+    }
+
+    initZoom();
 
     //     svg
     //     .append("g")
