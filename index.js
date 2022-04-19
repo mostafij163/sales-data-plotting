@@ -9,7 +9,7 @@ function spike(length, width = 10) {
 
 const projection = d3
   .geoMercator()
-  .scale(60000)
+  .scale(5000)
   .center([90.56423035, 23.79456711])
   .translate([width / 2, height / 2]);
 const pathGenerator = d3.geoPath().projection(projection);
@@ -55,7 +55,7 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
       .data(formatedData.filter((d) => d.position).sort((a, b) => d3.ascending(a.position[1], b.position[1]) || d3.ascending(a.position[0], b.position[0])))
       .join("path")
       .attr("transform", (d) => `translate(${d.position})`)
-      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData, (d) => d.TOTAL_Sales)], [0, 200])(d.TOTAL_Sales)))
+      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData, (d) => d.TOTAL_Sales)], [0, 100])(d.TOTAL_Sales), 15))
       .append("title")
       .text(
         (d) => `${d.title}
@@ -69,7 +69,7 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
       .data(formatedData.filter((d) => d.position).sort((a, b) => d3.ascending(a.position[1], b.position[1]) || d3.ascending(a.position[0], b.position[0])))
       .join("path")
       .attr("transform", (d) => `translate(${d.position})`)
-      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData, (d) => d.Consumer_Footfall)], [0, 50])(d.Consumer_Footfall)))
+      .attr("d", (d) => spike(d3.scaleLinear([0, d3.max(formatedData, (d) => d.Consumer_Footfall)], [0, 30])(d.Consumer_Footfall)))
       .append("title")
       .text(
         (d) => `${d.title}
@@ -77,4 +77,16 @@ d3.json("https://raw.githubusercontent.com/techslides/D3-Maps/master/data/world/
       );
   });
 });
+
+let zoom = d3.zoom().on("zoom", handleZoom);
+
+function handleZoom(e) {
+  d3.selectAll("svg g").attr("transform", e.transform);
+}
+
+function initZoom() {
+  d3.selectAll("svg").call(zoom);
+}
+
+initZoom();
 
